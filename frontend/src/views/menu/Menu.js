@@ -1,47 +1,18 @@
-import { useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Link } from "react-router-dom"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 const Menu = () => {
-  const navigate = useNavigate();
-  const userString = localStorage.getItem('user');
-  const user = userString ? JSON.parse(userString) : null;
-  console.log(user);
-
-  useEffect(() => {
-    !user && navigate('/login');
-  }, []);
-
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleLogOut = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
-
-  const handleCampgrounds = () => {
-    navigate('/menu/campgrounds');
-  };
-
-  const handleNewCampground = () => {
-    navigate('/menu/new-campground');
-  };
-
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            YelpCamp
-          </a>
+          <p className="navbar-brand">YelpCamp</p>
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -51,30 +22,27 @@ const Menu = () => {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             {/* Elementos a la izquierda */}
             <div className="navbar-nav mr-auto">
-              <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
-              <a onClick={handleCampgrounds} className="nav-link" href="/menu/campgrounds">
-                Campgrounds    
-              </a>
-              <a onClick={handleNewCampground} className="nav-link">
-                New Campground 
-              </a>  
+              <Link to="/menu/campgrounds" className="nav-link">
+                Campgrounds
+              </Link>
+              <Link to="/menu/new-campground" className="nav-link">
+                New Campground
+              </Link>
             </div>
             {/* Elementos a la derecha */}
-            <div className="navbar-nav ml-auto">                       
-              <a onClick={handleLogin} className="nav-link">
-                    LogIn 
-                </a>
-                <a onClick={handleLogOut} className="nav-link">
-                    LogOut
-                </a>
+            <div className="navbar-nav ml-auto">
+              <Link to="/login" className="nav-link">
+                login
+              </Link>
+              <Link to="/menu/campgrounds" className="nav-link">
+                logout
+              </Link>
             </div>
           </div>
         </div>
-      </nav>      
+      </nav>
     </>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu
