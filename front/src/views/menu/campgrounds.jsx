@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const Campgrounds = () => {
   const [campgrounds, setCampgrounds] = useState([])
@@ -9,9 +10,11 @@ const Campgrounds = () => {
       method: "DELETE",
     })
     if (res.ok) {
-      alert("Posteo eliminado")
+      //alert("Posteo eliminado")
+      toast.success("Posteo eliminado correctamente")
     } else {
-      alert("No se pudo eliminar el posteo")
+      //alert("No se pudo eliminar el posteo")
+      toast.error("No se pudo eliminar el posteo")
     }
   }
 
@@ -25,12 +28,12 @@ const Campgrounds = () => {
   })
   return (
     <div>
-      <h1>CAMPGROUDs</h1>
+      <h1 className="text-center">Campgrounds</h1>
       <div className="container min-vh-100">
-        <div className="row align-items-start gap-4">
+        <div className="row align-items-start gap-5 justify-content-center">
           {campgrounds.map((campground) => (
             <div
-              className="d-flex flex-column col-md-4 card p-2"
+              className="d-flex flex-column col-md-3 card p-2"
               key={campground._id}
             >
               <h1>{campground.title}</h1>
@@ -43,7 +46,7 @@ const Campgrounds = () => {
                   className="btn btn-danger"
                   onClick={() => handleDelete(campground._id)}
                 >
-                  Eliminar posteo
+                  Eliminar Post
                 </button>
               </div>
             </div>

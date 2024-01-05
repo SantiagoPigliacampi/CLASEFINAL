@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { toast } from "react-toastify";
 
 const Campground = () => {
   const { id } = useParams()
@@ -23,7 +24,9 @@ const Campground = () => {
       e.target.reset()
     } catch (error) {
       console.log(error)
-      alert("Error al crear el comentario")
+      //alert("Error al crear el comentario")
+      toast.error("Error al crear el comentario");
+      
     }
   }
 
@@ -44,7 +47,7 @@ const Campground = () => {
   }, [id])
 
   return (
-    <div>
+    <div className="container min-vh-100">
       <div className="container text-center">
         <div>
           <img

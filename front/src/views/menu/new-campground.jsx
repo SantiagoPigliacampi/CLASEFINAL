@@ -1,4 +1,6 @@
 import { useState } from "react"
+import {  toast } from "react-toastify";
+
 
 const NewCampground = () => {
   const [form, setForm] = useState({
@@ -19,11 +21,18 @@ const NewCampground = () => {
     })
 
     if (res.ok) {
-      alert("Post creado correctamente")
+      //alert("Post creado correctamente")   
+      toast.success("Post creado correctamente");
+      setForm({
+        title: "",
+        description: "",
+        image: "",
+      })   
     }
   }
 
   return (
+  
     <div className="min-vh-100">
       <h1 className="text-center">New Campground</h1>
 
@@ -71,7 +80,7 @@ const NewCampground = () => {
           type="submit"
           className="btn btn-success text-center w-100 mt-2"
         >
-          Crear post
+          Crear Post
         </button>
       </form>
     </div>
@@ -79,3 +88,5 @@ const NewCampground = () => {
 }
 
 export default NewCampground
+
+
