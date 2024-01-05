@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./styles.css";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <span className="navbar-brand mb-0 h1">Proyecto Final Node JS</span>
         <div className="navbar-nav">
           <Link to="#" className="nav-link">
-            Santiag Pigliacampi
+            Santiago Pigliacampi
           </Link>
         </div>
       </div>

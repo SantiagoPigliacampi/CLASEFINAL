@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
+import "./styles.css";
 
 const Menu = () => {
   return (
@@ -20,7 +21,7 @@ const Menu = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            {/* Elementos a la izquierda */}
+            {/* mr-auto = Campground y New Campground a la izquierda */}
             <div className="navbar-nav mr-auto">
               <Link to="/menu/campgrounds" className="nav-link">
                 Campgrounds
@@ -29,15 +30,15 @@ const Menu = () => {
                 New Campground
               </Link>
             </div>
-            {/* Elementos a la derecha */}
-            <div className="navbar-nav ml-auto">
+            {/* ml-auto: Login y Logout a la derecha */}
+            {/*<div className="navbar-nav ml-auto">
               <Link to="/login" className="nav-link">
                 login
               </Link>
               <Link to="/menu/campgrounds" className="nav-link">
                 logout
               </Link>
-            </div>
+            </div>*/}
           </div>
         </div>
       </nav>

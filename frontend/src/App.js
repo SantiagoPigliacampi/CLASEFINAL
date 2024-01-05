@@ -7,13 +7,15 @@ import NewCampground from "./views/menu/new-campground"
 import Campgrounds from "./views/menu/campgrounds"
 import Footer from "./views/menu/footer"
 import Campground from "./views/menu/Campground"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
     <BrowserRouter>
       <Menu />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {/*<Route path="/login" element={<Login />} />*/}
 
         <Route path="/menu/new-campground" element={<NewCampground />} />
         <Route path="/menu/campgrounds" element={<Campgrounds />} />
@@ -21,7 +23,8 @@ function App() {
         <Route path="/loginFormRegister" element={<LoginFormRegister />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+      <ToastContainer />
+    </BrowserRouter>    
   )
 }
 
