@@ -31,14 +31,17 @@ const Menu = () => {
               </Link>
             </div>
             {/* ml-auto: Login y Logout a la derecha */}
-            {/*<div className="navbar-nav ml-auto">
+            <div className="navbar-nav ml-auto">
+            <Link to="/loginRegisterForm" className="nav-link">
+                Registrarme
+              </Link>
               <Link to="/login" className="nav-link">
-                login
+                LogIn
               </Link>
-              <Link to="/menu/campgrounds" className="nav-link">
-                logout
+              <Link onClick={() => localStorage.removeItem("user")} to="/login" className="nav-link">
+                LogOut
               </Link>
-            </div>*/}
+            </div>
           </div>
         </div>
       </nav>

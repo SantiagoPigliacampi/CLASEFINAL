@@ -7,6 +7,9 @@ const commentSchema = new Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -19,7 +22,7 @@ const postSchema = new Schema(
     title: {
       type: String,
       required: true,
-    },
+    },    
     description: {
       type: String,
     },

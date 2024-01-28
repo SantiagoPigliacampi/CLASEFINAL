@@ -13,12 +13,15 @@ export const getComments = async (req, res) => {
 export const createComment = async (req, res) => {
   const { id } = req.params
   const { content } = req.body
+
   try {
+  
     const post = await postModel.findById(id)
-    post.comments.push({ content })
+    post.comments.push({ content,email: req.user.email })
     await post.save()
     res.status(201).json(post.comments)
   } catch (error) {
     res.status(500).json({ message: error.message })
+
   }
 }

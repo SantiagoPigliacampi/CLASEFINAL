@@ -1,46 +1,66 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify";
+import { connectionData } from "../../connection/apiConnection"
+import Comentario from "./Comentario";
+import ComentarioForm from "./ComentarioForm";
+import CampgroundImage from "./CampgroundImage";
 
 const Campground = () => {
   const { id } = useParams()
   const [campground, setCampground] = useState({})
   const [comments, setComments] = useState([])
 
+/**
+ * Create comment
+ * @param {*} e
+ * */
+
   const handleAddComment = async (e) => {
     e.preventDefault()
     const content = e.target.elements.content.value
     if (!content) return
     try {
-      const res = await fetch(`http://localhost:8080/comments/${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ content }),
-      })
+
+      //get the logged in user
+      const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+      const res = await connectionData(`comments/${id}`,"POST", { content})
       const data = await res.json()
       setComments(data)
       e.target.reset()
     } catch (error) {
-      console.log(error)
-      //alert("Error al crear el comentario")
+      console.log(error)     
       toast.error("Error al crear el comentario");
       
     }
   }
-
+/**
+ * Get posts
+ */
   useEffect(() => {
     const getCampground = async () => {
-      const res = await fetch(`http://localhost:8080/posts/${id}`)
+    try {
+      const res = await connectionData(`posts/${id}`,"GET")
       const data = await res.json()
       setCampground(data)
+    } catch (error) {
+      console.error("error al cargar el post", error);
     }
 
+    }
+
+/**
+ * get post's comments
+ */
     const getComments = async () => {
-      const res = await fetch(`http://localhost:8080/comments/${id}`)
-      const data = await res.json()
-      setComments(data)
+      try {
+        const res = await connectionData(`comments/${id}`,"GET")
+        const data = await res.json()
+        setComments(data) 
+      } catch (error) {
+        console.error(error)
+      }
+
     }
     getCampground()
     getComments()
@@ -48,49 +68,17 @@ const Campground = () => {
 
   return (
     <div className="container min-vh-100">
-      <div className="container text-center">
-        <div>
-          <img
-            className="img-fluid"
-            src={campground.image}
-            alt={campground.title}
-          />
-
-          <h1>{campground.title}</h1>
-          <p>{campground.description}</p>
-        </div>
-      </div>
+      <CampgroundImage campground={campground}/>
       <div className="container border-top">
         <div className="col-md-12 text-center w-50 mx-auto">
-          <form onSubmit={handleAddComment}>
-            <div className="mb-3">
-              <button type="submit" className="btn btn-primary my-2">
-                Agregar comentario
-              </button>
-              <textarea
-                className="form-control"
-                id="content"
-                name="content"
-                rows="3"
-              ></textarea>
-            </div>
-          </form>
+        <ComentarioForm handleAddComment={handleAddComment}/>
         </div>
         <div className="row border-top">
           <div className="col-md-12 text-center">
             <h1>Comentarios</h1>
             {comments.length > 0 ? (
               comments.map((comment) => (
-                <div key={comment._id} className="card my-2">
-                  <div className="card-body">
-                    <p className="card-text">{comment.content}</p>
-                    <p className="card-text">
-                      <small className="text-muted">
-                        {new Date(comment.createdAt).toLocaleDateString()}
-                      </small>
-                    </p>
-                  </div>
-                </div>
+              <Comentario key={comment._id} comment={comment}/>
               ))
             ) : (
               <p className="text-danger">No hay comentarios</p>

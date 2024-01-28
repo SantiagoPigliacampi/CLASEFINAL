@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import { connectionData } from "../../connection/apiConnection"
 
 const Campgrounds = () => {
   const [campgrounds, setCampgrounds] = useState([])
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:8080/posts/${id}`, {
-      method: "DELETE",
-    })
+    const res = await connectionData(`posts/${id}`, "DELETE")
     if (res.ok) {
       //alert("Posteo eliminado")
       toast.success("Posteo eliminado correctamente")
@@ -18,14 +17,19 @@ const Campgrounds = () => {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     const getCampgrounds = async () => {
-      const res = await fetch("http://localhost:8080/posts")
-      const data = await res.json()
-      setCampgrounds(data)
+      try {
+        const res = await connectionData('posts','GET')
+        const data = await res.json()
+        setCampgrounds(data)
+      } catch (error) {
+        console.error(error);
+      }
+
     }
     getCampgrounds()
-  })
+  },[])
   return (
     <div>
       <h1 className="text-center">Campgrounds</h1>
