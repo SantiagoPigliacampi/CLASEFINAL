@@ -7,9 +7,9 @@ import NewCampgroundForm from "./new-campground-form"
 const NewCampground = () => {
   const [form, setForm] = useState({
     title: "",
-    email: "",
     description: "",
     image: "",
+    email:"",
   })
 /**
  * Create post
@@ -25,9 +25,9 @@ const NewCampground = () => {
       toast.success("Post creado correctamente");
       setForm({
         title: "",
-        email: "",
         description: "",
         image: "",
+        email: "",
       })   
     }
   }

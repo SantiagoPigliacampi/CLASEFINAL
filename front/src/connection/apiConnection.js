@@ -16,16 +16,17 @@ try {
             if (localStorage.getItem('user')) {
                const user = JSON.parse(localStorage.getItem('user'));
                const token = user.token;
-               console.log(token);
+               //console.log(token);
                requestOptions.headers = {
                 ...requestOptions.headers,
                 'authorization': `${token}`,
               }
                
                 
-            }
-            console.log(requestOptions);
+            } 
+            //console.log(requestOptions);
             const response = await fetch(endpoint+'/'+direction,requestOptions);
+           
             return response; 
 
         }

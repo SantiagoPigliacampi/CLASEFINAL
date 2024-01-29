@@ -23,6 +23,7 @@ app.use(cors())
 app.use("/register", registerRouter)
 app.use("/login", loginRouter)
 app.use(TokenMiddleware)
+// Routes /posts and /comments are protected by TokenMiddleware
 app.use("/posts", postsRouter)
 app.use("/comments", commentsRouter)
 

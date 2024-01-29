@@ -30,8 +30,8 @@ export const createPost = async (req, res) => {
   if (!title) {
     return res.status(400).json({ message: "El titulo es requerido" })
   }
-
-  const newPost = new postModel({ title, description, image })
+console.log(req.user.email);
+  const newPost = new postModel({ title, description, image, email: req.user.email })
 
   try {
     const createdPost = await newPost.save()
